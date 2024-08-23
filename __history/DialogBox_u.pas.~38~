@@ -1,0 +1,77 @@
+unit DialogBox_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,Edit_u,Vcl.Grids,ContactInfo_u,
+  Vcl.ExtCtrls;
+
+type
+  TDialogBox = class(TForm)
+    btnEdit: TButton;
+    btnDelete: TButton;
+
+    procedure btnEditClick(Sender: TObject);
+    procedure getRowNumber(RNum:Integer);
+    procedure btnDeleteClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+   class var rowNumber:Integer;
+    { Public declarations }
+  end;
+
+var
+  DialogBox: TDialogBox;
+
+  MainForm: TMainForm;
+
+implementation
+
+{$R *.dfm}
+
+procedure TDialogBox.btnDeleteClick(Sender: TObject);
+var
+  FileLines: TStringList;
+begin
+      FileLines := TStringList.Create;
+      try
+      FileLines.LoadFromFile('Contact.txt');
+      FileLines.Delete(rowNumber-1);
+      FileLines.SaveToFile('Contact.txt');
+      MainForm.LoadDataFromFileToGrid('Contact.txt');
+      MainForm.lblSuccessCaaption.Caption:='Contact Deleted successfully';
+      MainForm.Timer1.Enabled:=True;
+      if MainForm.SortBtn.Checked then
+          MainForm.LoadAndSortData;
+      close;
+      finally
+      FileLines.Free;
+
+      end;
+
+end;
+
+procedure TDialogBox.btnEditClick(Sender: TObject);
+var
+   EditForm:TEditForm;
+begin
+      try
+      //MainForm:=TMainForm.Create(Self);
+        EditForm := TEditForm.Create(Self);
+     EditForm.LoadRowData(MainForm.sgdStringGrid, rowNumber, 'Contact.txt');
+     EditForm.ShowModal;
+    finally
+      EditForm.Free;
+    end;
+end;
+
+procedure TDialogBox.getRowNumber(RNum:Integer);
+begin
+       rowNumber:=RNum;
+end;
+
+
+
+end.

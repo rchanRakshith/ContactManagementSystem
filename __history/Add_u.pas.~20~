@@ -1,0 +1,70 @@
+﻿unit Add_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfrmAddForm = class(TForm)
+    edtAddName: TEdit;
+    edtAddPhoneNumber: TEdit;
+    edtAddEmail: TEdit;
+    lblLabel1: TLabel;
+    lblLabel2: TLabel;
+    lblLabel3: TLabel;
+    btnOK: TButton;
+    procedure btnOKClick(Sender: TObject);
+
+  end;
+
+var
+  frmAddForm: TfrmAddForm;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmAddForm.btnOKClick(Sender: TObject);
+var
+  vName, vPhoneNumber, vEmail, Line: string;
+  tFile: TextFile;
+  LastID, NewID: Integer;
+  IDFileName: string;
+begin
+  IDFileName := 'LastID.txt';
+  if FileExists(IDFileName) then
+  begin
+    AssignFile(tFile, IDFileName);
+    Reset(tFile);
+    ReadLn(tFile, LastID);
+    CloseFile(tFile);
+  end
+  else
+    LastID := 0;
+
+  NewID := LastID + 1;
+  AssignFile(tFile, IDFileName);
+  Rewrite(tFile);
+  WriteLn(tFile, NewID);
+  CloseFile(tFile);
+
+  vName := edtAddName.Text;
+  vPhoneNumber := edtAddPhoneNumber.Text;
+  vEmail := edtAddEmail.Text;
+  Line := IntToStr(NewID) + ',' + vName + ',' + vPhoneNumber + ',' + vEmail;
+
+  AssignFile(tFile, 'Contact.txt');
+  if FileExists('Contact.txt') then
+    Append(tFile)
+  else
+    Rewrite(tFile);
+
+  WriteLn(tFile, Line);
+  CloseFile(tFile);
+  close;
+end;
+
+end.

@@ -1,0 +1,26 @@
+unit DialogBox;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TDialogBox = class(TForm)
+    EDIT: TButton;
+    DELETE: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1:  TDialogBox;
+
+implementation
+
+{$R *.dfm}
+
+end.

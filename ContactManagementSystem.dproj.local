@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.494,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.382,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\AddNewContact.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.642,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.081,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\DeleteContact.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.698,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Interfaces\ContactInterface.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.649,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.924,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.939,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.070,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.025,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.756,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.630,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Services\ContactManagementServices.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.960,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.960,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Helper\HelperMethods.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.715,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\SortContacts.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.428,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\EditContact.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.012,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.749,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\SearchContacts.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.926,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.322,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\ContactInfo_u.dfm=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.417,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Edit_u.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.959,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit3.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.722,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\DialogBox_u.dfm=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.106,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit2.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.785,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Add_u.dfm=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit2.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.322,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\ContactInfo_u.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.722,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\DialogBox_u.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.926,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\DialogBox.dfm=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.350,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\DialogBox.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.785,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Add_u.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit2.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.165,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\ContactManagementSystem.dproj=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\Project5.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.926,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\DialogBox.pas=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.417,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Edit_u.dfm=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Unit1.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.453,=C:\Users\rchan\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2024-08-23 14:06:40.576,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\AddNewContact.pas=</Transaction>
+    <Transaction>2024-08-23 14:06:43.420,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\DeleteContact.pas=</Transaction>
+    <Transaction>2024-08-23 14:06:46.282,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\EditContact.pas=</Transaction>
+    <Transaction>2024-08-23 14:06:48.887,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\SearchContacts.pas=</Transaction>
+    <Transaction>2024-08-23 14:06:52.107,C:\Users\rchan\Documents\Embarcadero\Studio\Projects\ContactManagementSystem\Repository\SortContacts.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

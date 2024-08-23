@@ -1,0 +1,303 @@
+﻿unit ContactInfo_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,Add_u, Vcl.Grids,Edit_u, System.Generics.Collections,
+  Vcl.ExtCtrls,StrUtils;
+
+type
+  TMainForm = class(TForm)
+    btnAdd: TButton;
+    lblLabel1: TLabel;
+    sgdStringGrid: TStringGrid;
+    MainPanel: TPanel;
+    lblSuccessCaaption: TLabel;
+    Timer1: TTimer;
+    edtEdit1: TEdit;
+    Label2: TLabel;
+    cbxSortBtn: TCheckBox;
+    procedure btnAddClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure LoadDataFromFileToGrid(const FileName: string);
+     procedure  LoadAndSortData;
+    procedure LoadDataFromFile(const FileName: string);
+    procedure StringGridClick(Sender: TObject; ACol, ARow: LongInt;
+      var CanSelect: Boolean);
+    procedure Timer1Timer(Sender: TObject);
+    procedure EditChange(Sender: TObject);
+
+    procedure FilterNames(const FilterText: string);
+    procedure cbxSortBtnClick(Sender: TObject);
+  end;
+
+var
+  MainForm: TMainForm;
+
+
+implementation
+
+{$R *.dfm}
+uses
+ DialogBox_u;
+
+
+
+procedure TMainForm.btnAddClick(Sender: TObject);
+var
+vSecondForm:TForm2;
+begin
+    vSecondForm:=TForm2.Create(self);
+       try
+    vSecondForm.ShowModal;
+  finally
+    vSecondForm.Free;
+    LoadDataFromFileToGrid('Contact.txt');
+  if cbxSortBtn.Checked then
+      LoadAndSortData
+  end;
+end;
+
+
+
+procedure TMainForm.FilterNames(const FilterText: string);
+var
+  I, Row: Integer;
+  Lines: TStringList;
+  Parts: TArray<string>;
+begin
+  sgdStringGrid.RowCount := 1; // Reset grid (keep header row)
+  Row := 1;
+
+  
+  Lines := TStringList.Create;
+
+  try
+    if FilterText = '' then
+    begin
+      LoadDataFromFileToGrid('Contact.txt');
+    end
+    else
+    begin
+      Lines.LoadFromFile('Contact.txt');
+      for I := 0 to Lines.Count - 1 do
+      begin
+        Parts := SplitString(Lines[I], ',');
+        if ContainsText(Trim(Parts[1]), FilterText) then
+        begin
+          sgdStringGrid.RowCount := Row + 1;
+          sgdStringGrid.Cells[0, Row] := Trim(Parts[0]);
+          sgdStringGrid.Cells[1, Row] := Trim(Parts[1]);
+          sgdStringGrid.Cells[2, Row] := Trim(Parts[2]);
+          sgdStringGrid.Cells[3, Row] := Trim(Parts[3]);
+          Inc(Row);
+        end;
+      end;
+    end;
+  finally
+    Lines.Free;
+  end;
+end;
+
+            
+procedure TMainForm.EditChange(Sender: TObject);
+begin
+        FilterNames(edtEdit1.Text)
+end;
+
+procedure TMainForm.FormCreate(Sender: TObject);
+begin
+    sgdStringGrid.Cells[0, 0] := 'ID';
+  sgdStringGrid.Cells[1, 0] := 'Name';
+  sgdStringGrid.Cells[2, 0] := 'Phone Number';
+  sgdStringGrid.Cells[3, 0] := 'Email';
+  sgdStringGrid.ColWidths[0] := 50;
+  sgdStringGrid.ColWidths[1] := 300;
+  sgdStringGrid.ColWidths[2] := 300;
+  sgdStringGrid.ColWidths[3] := 350;
+  sgdStringGrid.Width := 1000;
+  sgdStringGrid.Height := 775;
+  LoadDataFromFileToGrid('Contact.txt');
+
+end;
+
+procedure TMainForm.LoadDataFromFileToGrid(const FileName: string);
+var
+  tFile: TextFile;
+  Line: string;
+  RowIndex, ColIndex: Integer;
+  Values: TArray<string>;
+begin
+  // Initialize the grid
+  sgdStringGrid.RowCount := 1;
+
+  // Open the file for reading
+  AssignFile(tFile, FileName);
+  Reset(tFile);
+
+  RowIndex := 1;
+
+  while not Eof(tFile) do
+  begin
+    ReadLn(tFile, Line);
+    Values := Line.Split([',']);
+    sgdStringGrid.RowCount := sgdStringGrid.RowCount + 1;
+
+    for ColIndex := Low(Values) to High(Values) do
+    begin
+      sgdStringGrid.Cells[ColIndex, RowIndex] := Values[ColIndex];
+    end;
+
+    Inc(RowIndex);
+  end;
+  CloseFile(tFile);
+end;
+
+
+
+procedure TMainForm.cbxSortBtnClick(Sender: TObject);
+begin
+  if cbxSortBtn.Checked then
+    LoadAndSortData
+  else
+    LoadDataFromFileToGrid('Contact.txt');
+end;
+
+ procedure TMainForm.LoadAndSortData;
+var
+  I,J, Row: Integer;
+  Lines: TStringList;
+  Parts: TArray<string>;
+  SortedList: TList<TStringList>;
+  RowData: TStringList;
+  Temp: TStringList;
+begin
+  
+  Lines := TStringList.Create;
+  SortedList := TList<TStringList>.Create;
+
+  try
+   
+    Lines.LoadFromFile('Contact.txt');
+    for I := 0 to Lines.Count - 1 do
+    begin
+      Parts := SplitString(Lines[I], ',');
+      if Length(Parts) > 1 then
+      begin
+        RowData := TStringList.Create;
+        try
+         
+          RowData.Add(Trim(Parts[1]));
+          RowData.Add(Trim(Parts[0])); 
+          RowData.Add(Trim(Parts[2]));
+          RowData.Add(Trim(Parts[3]));
+      
+              SortedList.Add(RowData);
+        except
+          RowData.Free;
+          raise;
+        end;
+      end;
+    end;
+
+  // Bubble sort
+for I := 0 to SortedList.Count - 2 do
+    begin
+      for J := I + 1 to SortedList.Count - 1 do
+      begin
+        if CompareText(SortedList[I][0], SortedList[J][0]) > 0 then
+        begin
+          
+          Temp := SortedList[I];
+          SortedList[I] := SortedList[J];
+          SortedList[J] := Temp;
+        end;
+      end;
+    end;
+
+
+    // Clear the grid and repopulate with sorted data
+    sgdStringGrid.RowCount := 1; // Reset grid (keep header row)
+    Row := 1;
+
+    for I := 0 to SortedList.Count - 1 do
+    begin
+      sgdStringGrid.RowCount := Row + 1; // Increase row count for each new row
+      sgdStringGrid.Cells[0, Row] := SortedList[I][1]; // Part before comma
+      sgdStringGrid.Cells[1, Row] := SortedList[I][0]; // Part after comma (the name)
+      sgdStringGrid.Cells[2, Row] := SortedList[I][2];
+      sgdStringGrid.Cells[3, Row] := SortedList[I][3];
+      Inc(Row);
+    end;
+  finally
+    // Free memory
+    for I := 0 to SortedList.Count - 1 do
+      SortedList[I].Free;
+    SortedList.Free;
+    Lines.Free;
+  end;
+end;
+
+
+
+procedure TMainForm.StringGridClick(Sender: TObject; ACol, ARow: LongInt;
+  var CanSelect: Boolean);
+  var
+  RowIndex: Integer;
+ box: TDialogBox;
+begin
+  RowIndex := sgdStringGrid.Row;
+  if RowIndex>0 then
+  begin
+  DialogBox.rowNumber:= RowIndex;
+  DialogBox.ShowModal;
+  end;
+
+end;
+
+
+procedure TMainForm.Timer1Timer(Sender: TObject);
+begin
+lblSuccessCaaption.Caption:='';
+Timer1.Enabled:=False;
+end;
+
+procedure TMainForm.LoadDataFromFile(const FileName: string);
+var
+  tFile: TextFile;
+  Line: string;
+  RowIndex: Integer;
+begin
+try
+
+
+  sgdStringGrid.ColCount := 4;
+  sgdStringGrid.RowCount := 1;
+ // Open the file for reading
+  AssignFile(tFile, FileName);
+  Reset(tFile);
+
+
+  RowIndex := 1;
+  while not Eof(tFile) do
+  begin
+    ReadLn(tFile, Line);
+    // Increase the number of rows in the grid
+    sgdStringGrid.RowCount := RowIndex + 1;
+
+    sgdStringGrid.Cells[0, RowIndex] := IntToStr(RowIndex);
+    sgdStringGrid.Cells[1, RowIndex] := Line.Split([','])[1];
+    sgdStringGrid.Cells[2, RowIndex] := Line.Split([','])[2];
+    sgdStringGrid.Cells[3, RowIndex] := Line.Split([','])[3];
+
+    Inc(RowIndex);
+  end;
+    finally
+     CloseFile(tFile);
+end;
+
+end;
+
+
+end.

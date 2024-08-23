@@ -1,0 +1,20 @@
+program ContactManagementSystem;
+
+uses
+  Vcl.Forms,
+  ContactInfo_u in 'ContactInfo_u.pas' {MainForm},
+  Add_u in 'Add_u.pas' {Form2},
+  Edit_u in 'Edit_u.pas' {EditForm},
+  DialogBox_u in 'DialogBox_u.pas' {DialogBox};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+ Application.MainFormOnTaskbar := True;
+ Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TForm2, Form2);
+  Application.CreateForm(TEditForm, EditForm);
+  Application.CreateForm(TDialogBox, DialogBox);
+  Application.Run;
+end.

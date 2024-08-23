@@ -1,0 +1,98 @@
+﻿
+unit Edit_u;
+
+interface
+
+uses
+  Forms, StdCtrls,Grids, Controls, Classes, ExtCtrls, SysUtils,ContactInfo_u;
+
+type
+  TEditForm = class(TForm)
+    edtName: TEdit;
+    edtPhone: TEdit;
+    edtEmail: TEdit;
+   btnEditOK: TButton;
+   label1:TLabel;
+   label2:TLabel;
+   label3:TLabel;
+
+    //FGrid: TStringGrid;
+
+   procedure btnEditOKClick(Sender: TObject);
+
+    procedure SaveChangesToFile;
+  public
+    procedure LoadRowData(Grid: TStringGrid; RowIndex: Integer; FileName: string);
+  end;
+
+  var
+  EditForm:TEditForm;
+
+implementation
+
+{$R *.dfm}
+uses
+ContactInfo_u;
+ var
+  vRowIndex: Integer;
+  vFileName: string;
+procedure TEditForm.LoadRowData(Grid: TStringGrid; RowIndex: Integer; FileName: string);
+
+begin
+  vRowIndex := RowIndex;
+  FGrid := Grid;
+  vFileName := FileName;
+
+  edtName.Text := Grid.Cells[1, RowIndex];
+  edtPhone.Text := Grid.Cells[2, RowIndex];
+  edtEmail.Text := Grid.Cells[3, RowIndex];
+
+end;
+
+
+procedure TEditForm.SaveChangesToFile;
+var
+  vFile: TextFile;
+  Iterator: Integer;
+  Line: string;
+MainForm: TfrmMainForm;
+
+begin
+try
+
+
+  AssignFile(vFile, vFileName);
+  Rewrite(vFile);
+
+  for Iterator := 1 to FGrid.RowCount - 1 do
+  begin
+    Line := IntToStr(Iterator) + ',' + FGrid.Cells[1, Iterator] + ',' + FGrid.Cells[2, Iterator] + ',' +
+            FGrid.Cells[3, Iterator] ;
+    WriteLn(vFile, Line);
+  end;
+  if MainForm.cbxSortBtn.Checked then
+          MainForm.LoadAndSortData;
+  MainForm.LoadDataFromFileToGrid('Contact.txt');
+finally
+     CloseFile(vFile);
+end;
+
+
+end;
+
+procedure TEditForm.btnEditOKClick(Sender: TObject);
+begin
+     // Save the changes back to the grid
+  FGrid.Cells[1, vRowIndex] := edtName.Text;
+  FGrid.Cells[2, vRowIndex] := edtPhone.Text;
+  FGrid.Cells[3, vRowIndex] := edtEmail.Text;
+  // Save changes to the file
+
+  SaveChangesToFile;
+
+
+  Close;
+end;
+
+end.
+

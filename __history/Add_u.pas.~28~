@@ -1,0 +1,91 @@
+unit Add_u;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,System.RegularExpressions,HelperMethods;
+
+type
+  TfrmAddForm = class(TForm)
+    edtAddName: TEdit;
+    edtAddPhoneNumber: TEdit;
+    edtAddEmail: TEdit;
+    lblLabel1: TLabel;
+    lblLabel2: TLabel;
+    lblLabel3: TLabel;
+    btnOK: TButton;
+    procedure btnOKClick(Sender: TObject);
+    procedure edtAddEmailChange(Sender: TObject);
+
+  end;
+
+var
+  frmAddForm: TfrmAddForm;
+  Helper:THelper;
+implementation
+
+{$R *.dfm}
+
+
+procedure TfrmAddForm.btnOKClick(Sender: TObject);
+var
+  vName, vPhoneNumber, vEmail, vLine: string;
+  vFile: TextFile;
+  vLastID, vNewID: Integer;
+  vIDFileName: string;
+begin
+  vIDFileName := 'LastID.txt';
+  if FileExists(vIDFileName) then
+  begin
+    AssignFile(vFile, vIDFileName);
+    Reset(vFile);
+    ReadLn(vFile, vLastID);
+    CloseFile(vFile);
+  end
+  else
+    vLastID := 0;
+
+  vNewID := vLastID + 1;
+  AssignFile(vFile, vIDFileName);
+  Rewrite(vFile);
+  WriteLn(vFile, vNewID);
+  CloseFile(vFile);
+
+  vName := edtAddName.Text;
+  vPhoneNumber := edtAddPhoneNumber.Text;
+  vEmail := edtAddEmail.Text;
+  vLine := IntToStr(vNewID) + ',' + vName + ',' + vPhoneNumber + ',' + vEmail;
+
+  AssignFile(vFile, 'Contact.txt');
+  if FileExists('Contact.txt') then
+    Append(vFile)
+  else
+    Rewrite(vFile);
+
+  WriteLn(vFile, vLine);
+  CloseFile(vFile);
+  close;
+end;
+
+
+procedure TfrmAddForm.edtAddEmailChange(Sender: TObject);
+begin
+helper:=THelper.Create;
+try
+  if helper.IsValidEmail(EdtAddEmail.Text) then
+  begin
+    EdtAddEmail.Color := clWhite;
+  end
+  else
+  begin
+    EdtAddEmail.Color := clRed;
+
+  end;
+finally
+    helper.free;
+end;
+end;
+
+
+end.
